@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const nodeMailer = require('nodemailer');
 const dateandtime = require('date-and-time');
+const environment = require('../config/environment');
 
 const catchAsync = fn => (req, res, next) => {
     Promise.resolve(fn(req, res, next)).catch(next);
@@ -64,7 +65,7 @@ const transporter = nodeMailer.createTransport({
     secure: false,
     auth: {
         user: 'waliamanshu17@gmail.com',
-        pass: 'aaisbefkvgtxggpm'
+        pass: environment.password
     }
 })
 const forgotpassword = async (req, res) => {
@@ -73,7 +74,7 @@ const forgotpassword = async (req, res) => {
     const timestamp = Date.now();
     otpStorage[email] = { otp, timestamp };
     try {
-        await transporter.sendMail({//aais befk vgtx ggpm
+        await transporter.sendMail({
             from: 'waliamanshu17@gmail.com',
             to: email,
             subject: "otp because you forgot your password dumb bimbo",

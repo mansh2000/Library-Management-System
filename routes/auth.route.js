@@ -4,7 +4,7 @@ const authValidation = require('../validation/user.validation');
 const publishValidation = require('../validation/publisher.validation');
 const reviewValidation = require('../validation/review.validation');
 const bookValidation = require('../validation/book.validation');
-const paymentValidation = require('../validation/payment.validation');
+
 
 const authController = require('../controller/auth.controller');
 const bookController = require('../controller/books.controller');
@@ -13,7 +13,7 @@ const reviewController = require('../controller/review.controller');
 const paymentController = require('../controller/payment.controller');
 
 const { userAuthentication } = require('../middleware/auth.middleware');
-const { verifyToken, isAdmin } = require('../middleware/roles.middleware');
+const {  isAdmin } = require('../middleware/roles.middleware');
 const validator = require('../validation/index');
 let router = express.Router();
 
@@ -28,6 +28,7 @@ router.post('/addBook', validator(bookValidation.addBook), isAdmin('admin'), boo
 router.post('/deleteBook', validator(bookValidation.deleteBook), isAdmin('admin'), bookController.deleteBook);
 router.post('/postReview', validator(reviewValidation.postReview), reviewController.postReview);
 router.post('/addPublisher', validator(publishValidation.addPublisher), publishController.addPublisher);
-router.post('/addPayment', validator(paymentValidation.addPayment), paymentController.addPayment);
+router.post('/addPayment',  paymentController.addPayment);
+router.post('/addCsv', publishController.addCsv);
 
 module.exports = router;

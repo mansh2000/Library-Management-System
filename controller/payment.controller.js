@@ -13,7 +13,11 @@ const addPayment = async (req, res) => {
     const paymentIntent = await stripe.paymentIntents.create({
       amount: amount,
       currency: 'usd',
-      payment_method: 'pm_card_visa'
+      payment_method: 'pm_card_visa',
+      metadata: {
+        userName: 'manshkigf@gmail.com',
+      email: "haimanshkigf@gmail.com"
+      }
     });
     const createuser = await payment.create({
       userName,

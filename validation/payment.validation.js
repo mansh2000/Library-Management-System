@@ -5,6 +5,7 @@ const addPayment = {
         userName: joi.string().required(),
         email: joi.string().required(),
         amount: joi.number().required(),
+        bankName:joi.string().required()
     })
 };
 module.exports = { addPayment };
